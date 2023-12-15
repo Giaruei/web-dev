@@ -1,0 +1,106 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  background-color: #e08aa2;
+}
+
+.banner .word {
+  position: absolute;
+  left: 30px;
+}
+
+.banner .tools {
+  position: absolute;
+  right: 20px;
+  color: #dddddd;
+}
+
+.banner p {
+  font-size: 10rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.banner span {
+  font-size: 4rem;
+  color: #fff;
+}
+
+.go {
+  width: 200px;
+  height: 60px;
+  border-radius: 20px;
+  background: linear-gradient(to right, #ff8c00, #ff6347);
+  padding: 10px 20px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.8s ease;
+}
+
+.go:hover {
+  background: linear-gradient(to right, #ff6347, #ff8c00);
+}
+
+.container {
+  position: relative;
+  width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  /* width: 100%; */
+  /* height: 40vh; */
+  padding: 30px;
+  background-color: #2b2d42;
+}
+
+.main img {
+  width: 60vw;
+}
+
+.picture {
+  display: flex;
+
+  color: #fff;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" type="text/css" href="main.css" />
+	</head>
+	<body>
+		<nav class="banner">
+			<div class="word">
+				<p>WEB</p>
+				<p>JOURNEY</p>
+				<span>Here are my websites.</span>
+				<button class="go">Go to my profile</button>
+			</div>
+			<div class="tools">
+				<h3>My favorate tech stack:</h3>
+				<img
+					src="https://cdn.worldvectorlogo.com/logos/nextjs-2.svg"
+					alt="nextjs"
+					width="40"
+					height="40"
+				/>
+				<img
+					src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg"
+					alt="tailwind"
+					width="40"
+					height="40"
+				/>
+				<img
+					src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg"
+					alt="mongodb"
+					width="40"
+					height="40"
+				/>
+				<img
+					src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
+					alt="javascript"
+					width="40"
+					height="40"
+				/>
+				<img
+					src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg"
+					alt="html5"
+					width="40"
+					height="40"
+				/>
+			</div>
+			<div class="container">
+				<div class="carousel-images">
+					<img class="carousel-image" src="./react.png" alt="" />
+					<img class="carousel-image" src="./nextjs.png" alt="" />
+					<img class="carousel-image" src="./zustand.png" alt="" />
+					<img class="carousel-image" src="./prisma.png" alt="" />
+					<img class="carousel-image" src="./tailwind.png" alt="" />
+					<img class="carousel-image" src="./shadcn.png" alt="" />
+					<button class="carousel-button prev" onclick="prevImage()">
+						Previous
+					</button>
+					<button class="carousel-button next" onclick="nextImage()">
+						Next
+					</button>
+				</div>
+			</div>
+		</nav>
+		<main class="main">
+			<div class="picture">
+				<img src="./imgtagger.png" alt="" />
+				<h1>ImageTagger</h1>
+				<p>My project in company -- A tool for select photos</p>
+			</div>
+			<div class="picture">
+				<img src="./message.png" alt="" />
+				<h1>Messager</h1>
+				<p>An online chat room</p>
+				<a href="https://i-kun-companion.vercel.app/">visit</a>
+			</div>
+			<div class="picture">
+				<img src="./genius1.png" alt="" />
+				<h1>Messager</h1>
+				<p>An AI generator like ChatGPT</p>
+			</div>
+			<div class="picture">
+				<img src="./netflix.png" alt="" />
+				<h1>Netflex clone</h1>
+				<p>An online media player</p>
+			</div>
+		</main>
+		<script>
+			let currentImageIndex = 0;
+
+			function showImage(index) {
+				const carouselImages = document.querySelector(".carousel-images");
+				const imageWidth =
+					document.querySelector(".carousel-image").offsetWidth;
+				const transformValue = -index * imageWidth + "px";
+				carouselImages.style.transform = "translateX(" + transformValue + ")";
+			}
+
+			function nextImage() {
+				currentImageIndex =
+					(currentImageIndex + 1) %
+					document.querySelectorAll(".carousel-image").length;
+				showImage(currentImageIndex);
+			}
+
+			function prevImage() {
+				currentImageIndex =
+					(currentImageIndex -
+						1 +
+						document.querySelectorAll(".carousel-image").length) %
+					document.querySelectorAll(".carousel-image").length;
+				showImage(currentImageIndex);
+			}
+		</script>
+	</body>
+</html>
