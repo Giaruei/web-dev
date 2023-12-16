@@ -47,22 +47,42 @@
 					height="40"
 				/>
 			</div>
-			<div class="container">
-				<div class="carousel-images">
-					<img class="carousel-image" src="./react.png" alt="" />
-					<img class="carousel-image" src="./nextjs.png" alt="" />
-					<img class="carousel-image" src="./zustand.png" alt="" />
-					<img class="carousel-image" src="./prisma.png" alt="" />
-					<img class="carousel-image" src="./tailwind.png" alt="" />
-					<img class="carousel-image" src="./shadcn.png" alt="" />
-					<button class="carousel-button prev" onclick="prevImage()">
-						Previous
-					</button>
-					<button class="carousel-button next" onclick="nextImage()">
-						Next
-					</button>
-				</div>
-			</div>
+      <div class="focus">
+        <!-- 核心滚动区域 -->
+        <ul>
+            <li>
+              <a href="javascript:;">
+                <img src="./react.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">
+                <img src="./nextjs.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">
+                <img src="./zustand.png" alt="">            
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">
+                <img src="./tailwind.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">
+                <img src="./shadcn.png" alt="">
+              </a>
+            </li>
+        </ul>
+        <!-- 左右两个箭头 -->
+        <a href="javascript:;" class="arrow-l" style="left: 0px;">←</a>
+        <a href="javascript:;" class="arrow-r" style="right: 0px;">→</a>     
+        
+        <!-- 小圆圈 -->
+        <ol class="circle">
+        </ol>
 		</nav>
 		<main class="main">
 			<div class="picture">
@@ -88,31 +108,166 @@
 			</div>
 		</main>
 		<script>
-			let currentImageIndex = 0;
+      function animate(obj, target, callback) {
+        clearInterval(obj.timer); // 清除定时器
+        // 定时器
+        obj.timer = setInterval(function() {
+        // 判断&停止定时器
+        
+            // 把步长值写到定时器里面
+        // 把步长转化为int 不能变成小数
+        let step = (target - obj.offsetLeft) / 10;
+        // Math.ceil——向上取整  Math.floor——向下取整
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        obj.style.left = obj.offsetLeft + step + 'px';
+        // obj.style.top = obj.offsetTop + 1 + 'px';
+        // 把每次加一这个步长值改为一个慢慢变小的值
+        // （目标值 - 现在的位置）/ 10
+        if(obj.offsetLeft == target) {
+        
+            clearInterval(obj.timer);
+            // 回调函数写到定时器结束里面
+            // if(callback) {
+            //     // 调用函数
+            //     callback();
+            //     // 也就是说定时器结束后 即动画动完了 调用这个函数
+            // }
+            // 简单点的写法：
+            callback && callback();
+        }
+        
+    }, 15)
+}
+		 // 1.鼠标经过轮播图 左右按钮显示 离开隐藏
+        // 2.点击右侧按钮一次 图片往左播放一张 依次类推 左侧按钮同理
+        // 3.图片播放的同时 下面的小圆圈跟随一起变化
+        // 4.点击小圆圈 可以播放相应的图片
+        // 5.鼠标不经过轮播图 轮播图也会自动播放图片
+        // 6.鼠标经过 轮播图自动播放停止
 
-			function showImage(index) {
-				const carouselImages = document.querySelector(".carousel-images");
-				const imageWidth =
-					document.querySelector(".carousel-image").offsetWidth;
-				const transformValue = -index * imageWidth + "px";
-				carouselImages.style.transform = "translateX(" + transformValue + ")";
-			}
+        // 1 获取元素
+        let arrow_l = document.querySelector('.arrow-l');
+        let arrow_r = document.querySelector('.arrow-r');
+        let focus = document.querySelector('.focus');
+        let focusWidth = focus.offsetWidth;
 
-			function nextImage() {
-				currentImageIndex =
-					(currentImageIndex + 1) %
-					document.querySelectorAll(".carousel-image").length;
-				showImage(currentImageIndex);
-			}
+        // 2 鼠标经过focus 就显示和隐藏左右按钮
+        focus.addEventListener('mouseenter', function() {
+            arrow_l.style.display = 'block';
+            arrow_r.style.display = 'block';
+            clearInterval(timer);
+            // 清除定时器变量
+            timer = null;
+        })
+        focus.addEventListener('mouseleave', function() {
+            arrow_l.style.display = 'none';
+            arrow_r.style.display = 'none';
+            timer = setInterval(function() {
+                arrow_r.click();
+                // 手动调用点击事件！！
+            }, 2000)
+        })
 
-			function prevImage() {
-				currentImageIndex =
-					(currentImageIndex -
-						1 +
-						document.querySelectorAll(".carousel-image").length) %
-					document.querySelectorAll(".carousel-image").length;
-				showImage(currentImageIndex);
-			}
+        // 3 动态生成小圆圈 有几张图就有几个
+        let ul = focus.querySelector('ul'); // 要加限定 轮播图里面的ul
+        let ol = focus.querySelector('ol');
+
+        for(let i = 0; i < ul.children.length; i++) {
+            // 创建一个li
+            let li = document.createElement('li');
+            // 记录当前小圆圈的索引号 通过自定义属性
+            li.setAttribute('index', i);
+            // 把li插入到ol里
+            ol.appendChild(li);
+            // 4 小圆圈排他 在生成小圆圈的同时绑定点击事件
+            li.addEventListener('click', function() {
+                // 干掉所有人 把所有li清除类名
+                for(let i = 0; i < ol.children.length; i++) {
+                    ol.children[i].className= '';
+                }
+                // 留下我自己 当前的li设置current
+                this.className = 'current';
+                // 5 点击小圆圈移动图片 要整个ul一起动
+                // ul的移动距离 -小圆圈的索引号*图片的宽度338
+                // 点击某个li时 就拿到当前li的索引号
+                let index = this.getAttribute('index');
+                // 同时要把这个li的索引号给到num
+                num = index;
+                circle = index;
+                console.log(index);
+                animate(ul, -index * focusWidth);
+            })
+        }
+
+        // 把ol里面第一个li设置为current
+        ol.children[0].className = 'current';
+        // 6 克隆第一张图片li 放到ul最后面
+        let first = ul.children[0].cloneNode(true);
+        ul.appendChild(first);
+
+        // 7 点击右侧按钮图片滚动一张
+        let num = 0;
+        // circle控制小圆圈的播放
+        let circle = 0;
+        // 定义节流阀flag
+        let flag = true;
+        arrow_r.addEventListener('click', function() {
+            if(flag) {
+                flag = false; 
+                // 关闭节流阀
+
+                // 如果走到最后复制的那张图片 ul要快速复原
+                if(num == ul.children.length - 1) {
+                        ul.style.left = 0;
+                        num = 0;
+                    }
+                num++;
+                animate(ul, -num * focusWidth, function() {
+                    flag = true;
+                    // 打开节流阀
+                });
+                // 8 点击右侧按钮 小圆圈跟随一起变化 可以再声明一个变量控制小圆圈的播放
+                circle++;
+                // 如果circle == ol.children.length 说明走到了克隆的最后这张图片
+                circle = circle == ol.children.length ? 0 : circle;// 复原
+                // 调用圆圈滚动的函数
+                circleChange();
+            }
+            
+        })
+        // 9 左侧按钮做法
+        arrow_l.addEventListener('click', function() {
+            // 如果走到最后复制的那张图片 ul要快速复原
+            if(num == 0) {
+                    num = ul.children.length - 1;
+                    ul.style.left = -num * focusWidth + 'px';
+                }
+            num--;
+            animate(ul, -num * focusWidth);
+            // 8 点击右侧按钮 小圆圈跟随一起变化 可以再声明一个变量控制小圆圈的播放
+            circle--;
+            // 如果circle < 0 说明在第一张图片 小圆圈改成第五个小圆圈
+            circle = circle < 0 ? ol.children.length - 1 : circle;// 复原
+            // 调用圆圈滚动的函数
+            circleChange();
+        })
+        // 圆圈滚动的函数
+        function circleChange() {
+            // 排他 先清除其余小圆圈的类名
+            for(let i = 0; i < ol.children.length; i++) {
+                ol.children[i].className = '';
+            }
+            // 再加进去类名
+            ol.children[circle].className = 'current';
+        }
+
+        // 10 自动播放轮播图
+        let timer = setInterval(function() {
+            arrow_r.click();
+            // 手动调用点击事件！！
+        }, 2000)
+
+
 		</script>
 	</body>
 </html>
