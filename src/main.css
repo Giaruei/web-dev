@@ -1,0 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    /* 背景 */
+    background: url(1.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+li {
+    list-style: none;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: 8fr 2fr;  /* 把页面四六分 */
+    align-items: center; /* 居中显示 */
+    /* margin-top: 10px; */
+    /* display: none; */
+}
+/* 上面的第几周 还有箭头 */
+nav {
+    grid-area: nav;
+    height: 50px;
+    height: 50px;
+
+    text-align: center;
+    
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav .arrow {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(255, 255, 255, 0.166);
+    border-radius: 50%;
+    margin: 0 10px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: all .5s;
+}
+nav .arrow:hover {
+    background-color: rgba(255, 255, 255, .7)
+}/* 最上面看第几周的样式 */
+nav h2 {
+    font-size: 40px;
+}
+
+/* 左边的课程表 */
+.main {
+    display: grid;
+    grid-template-areas:
+        "nav nav"
+        "time week"
+        "time .";
+    /* column-gap: 10px; */
+    /* 列的宽 */
+    grid-template-columns: 1fr 9fr;
+    /* 行的高 */
+    grid-template-rows: 50px 700px;
+    text-align: center;
+    line-height: 50px;
+    /* width: 60%; */
+    cursor: default;
+    /* 鼠标都给我变成原始样式 */
+}
+/* 左侧的时间栏 */
+.time {
+    /* grid-column-start: 2;
+    grid-column-end: 3; */
+    /* width: 100%; */
+    /* height: 100px; */
+    /* background-color: rgba(255, 255, 255, 0.303); */
+    grid-area: time;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+    top: 50px;
+    color: #fff;
+}
+
+.time>div {
+    height: 50px;
+    /* width: 100px; */
+
+    /* background-color: rgba(40, 101, 154, 0.129); */
+    /* border-right: 1px solid pink; */
+}
+/* 上侧的星期栏 */
+.date {
+    grid-area: week;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    /* width: 10%; */
+    /* height: 500px; */
+    /* background-color: blanchedalmond; */
+    
+}
+
+.date>div {
+    position: relative;
+    width: 100%;
+    /* max-width: 100px; */
+    /* height: 100px; */
+    /* background-color: pink; */
+    /* margin: 10px 0; */
+    margin-right: 10px;
+}
+
+
+
+/* 接下来写右边的功能栏 */
+.column {
+    position: relative;
+    top: -40px;
+    right: 10px;
+    width: 90%;
+    height: 550px;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .4);
+    border-radius: 5px;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+
+}
+
+.column>h2 {
+    color: #0367a6;
+}
+
+.column ul {
+    width: 90%;
+    height: 400px;
+    overflow: overlay;
+    text-align: center;border-radius: 5px;
+
+}
+.column ul li {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    
+    color: #fff;
+    background-color: rgba(89, 165, 219, .5);
+}
+.column .li:hover {
+    background-color: rgb(89, 165, 219);
+}
+.column-btn {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+    top: 20px;
+}
+.column .create-classify,
+.column .delete-classify {
+    text-align: center;
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 5px;
+    color: white;
+    
+    background-image: linear-gradient(90deg, #0368a689 0%, #008897a1 74%);
+    
+}
+.column .create-classify:hover {
+    background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+    cursor: pointer;
+}
+.column-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    width: 315px;
+    height: 150px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, .8);
+    color: #005299;
+    display: none;
+    flex-direction: column;
+}
+.column-window h2 {
+    color: #005299;
+    font-weight: normal;
+    height: 50px;
+    line-height: 50px;
+    /* margin: 15px 0; */
+    border-bottom: 1px solid #008997;
+}
+.column-window h2:hover {
+    cursor: move;
+}
+.column-window input {
+    outline-style: none ;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 250px;
+    height: 30px;
+    font-size: 16px;
+    color: #008997;
+    margin: 15px auto;
+}
+.column-window  input:focus {
+    border: 1px solid #008997;    
+}
+.column-submit {
+    text-align: center;
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    background-image: linear-gradient(90deg, #0368a689 0%, #008897a1 74%);
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.column-submit:hover {
+    cursor: pointer;
+    background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+}
+.create {
+    position: relative;
+    top: 110px;
+    width: 100%;
+    height: 60px;
+    /* background-color: rgba(255, 255, 255, 0.4); */
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .4);
+    /* border-radius: 5px; */
+    color: #ffffff;
+    line-height: 60px;
+    font-size: 30px;
+    text-align: center;
+
+    background-image: linear-gradient(to right, #25aae1, #40e495);
+    border-radius: 40px;
+}
+.create::before {
+    content: '';
+    display: block;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, .4) 50%);
+    background-size: 210% 100%;
+    background-position: right bottom;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 40px;
+    transition: all 1s;
+}
+.create:hover::before {
+    background-position: left bottom;
+}
+.create:hover {
+    cursor: pointer;
+}

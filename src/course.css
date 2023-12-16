@@ -1,0 +1,156 @@
+/* 这是每个课程的统一样式 */
+.class {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+    line-height: 25px;
+    background-color: rgba(89, 165, 219, 0.5);
+    border-radius: 8px;
+    color: rgb(243, 243, 243);
+    font-size: 14px;
+    transition: all .5s;
+    font-size: 16px;
+}
+.class:hover {
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .4);
+    background-color: #2ec27ab9;
+    font-size: 18px;
+    
+    transform: scale(1.1);
+}
+
+.mask {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8888;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+#window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+
+    display: none;
+    flex-direction: column;
+    align-items: start;
+
+    width: 215px;
+    height: 550px;
+    line-height: 40px;
+    padding: 15px;
+    
+    color: #005299;
+    background-color: rgba(255, 255, 255, 0.834);
+    border-radius: 4px;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .4);
+    
+}
+.close {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 30px;
+}
+.close:hover {
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+#window h2 {
+    cursor: move;
+    text-align: left;
+    width: 100%;
+}
+#window h2::after {
+    content: '可以在此修改课程信息噢~';
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    color: #008997;
+    font-size: 14px;
+    font-weight: normal;
+}
+.window-courses {
+    position: relative;
+    width: 150px;
+    height: 30px;
+    
+    line-height: 30px;
+    /* overflow: hidden; */
+    background-color: #abd8ff;
+    /* border-radius: 3px; */
+    transition: all .5s;
+}
+.menu {
+    position: absolute;
+    top: 134px;
+    left: 170px;
+    border: 15px solid transparent;
+    border-top: 15px solid #abd8ff;
+    cursor: pointer;
+    transition: all .5s;
+    transform-origin: 50% 25%;
+}
+.window-courses ul {
+    display: none;
+
+    position: absolute;
+    width: 150px;
+    background-color: inherit;
+    z-index: 9999999;
+}
+.window-courses li {
+    list-style: none;
+    background-color: inherit;
+    cursor: pointer;
+    transition: all .5s;
+    height: 30px;
+}
+.window-courses li:hover {
+    background-color: #62aaea;
+}
+#window input {
+    outline-style: none ;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 150px;
+    height: 30px;
+    font-size: 16px;
+    color: #008997;
+}
+#window input:focus {
+    border: 1px solid #008997;
+}
+.update-course {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+.delete-course {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.update-course,
+.delete-course {
+    width: 70px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    background-image: linear-gradient(90deg, #0368a689 0%, #008897a1 74%);
+}
+.update-course:hover,
+.delete-course:hover {
+    background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+}

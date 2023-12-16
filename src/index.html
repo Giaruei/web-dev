@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一个没什么用的课程表</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="container.css">
+    <link rel="stylesheet" href="course.css">
+    <link rel="shortcut icon" href="icon.png">
+</head>
+
+<body>
+    
+    <div class="name"></div>
+    <div class="night">夜间模式</div>
+    <div class="mask"></div>
+    <div class="tip"></div>
+    <div class="container right-panel-active">
+        <!-- right-panel-active 右边的注册面板先在 -->
+        <!-- 注册框 -->
+        <div class="container-form container-register">
+            <form action="#" class="form" id="form1">
+                <h2>注册账号</h2>
+                <input type="text" placeholder="Username 2~16个数字字母组合" class="input register-username">
+                <input type="password" placeholder="Password 6~16个字符组合" class="input register-password">
+                <div class="btn register">点击注册</div>
+            </form>
+        </div>
+        <!-- 登录框 -->
+        <div class="container-form container-login">
+            <form action="#" class="form" id="form2">
+                <h2>欢迎登录</h2>
+                <input type="text" placeholder="Username" class="input login-username">
+                <input type="password" placeholder="Password" class="input login-password">
+                <div class="btn login">点击登录</div>
+            </form>
+        </div>
+        <!-- 遮罩层 -->
+        <div class="container-overlay">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <div class="btn" id="login">已有账号，直接登录</div>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <div class="btn" id="register">没有账号，点击注册</div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <!-- 这里原先写着none 记得加回去 -->
+    <div class="page" style="display: none; margin-top: 10px;" > 
+        <div class="main">
+            <!-- 上面的周次与切换的箭头 -->
+            <nav>
+                <div class="arrow arrow-left" style="position: relative; right: 20px;">&lt;</div>
+                <h2 id="week" style="width: 150px;"></h2>
+                <div class="arrow arrow-right" style="position: relative; left: 20px;">&gt;</div>
+            </nav>
+            <!-- 主体课程表的框架 左边 -->
+            <div class="date">
+                <div class="Monday" data-index="1">星期一</div>
+                <div class="Tuesday" data-index="2">星期二</div>
+                <div class="Wednesday"data-index="3">星期三</div>
+                <div class="Thrusday" data-index="4">星期四</div>
+                <div class="Friday" data-index="5">星期五</div>
+                <div class="Saturday" data-index="6">星期六</div>
+                <div class="Sunday" data-index="0">星期日</div>
+            </div>
+            <!-- 可以用js做for循环把时间打出来 -->
+            <div class="time">
+                <div>08:00</div>
+                <div>09:00</div>
+                <div>10:00</div>
+                <div>11:00</div>
+                <div>12:00</div>
+                <div>13:00</div>
+                <div>14:00</div>
+                <div>15:00</div>
+                <div>16:00</div>
+                <div>17:00</div>
+                <div>18:00</div>
+                <div>19:00</div>
+                <div>20:00</div>
+                <div>21:00</div>
+            </div>
+            <!-- 每节课点出来的弹框 -->
+            <div id="window">
+                <span class="close">×</span>
+                <span class="menu"></span>
+                <h2>课程信息</h2>
+                <h3 style="margin-top: 30px;">课程分类</h3>
+                <div class="window-courses"></div>
+                <h3>上课周次</h3> <input type="text" class="create-week">
+                <h3>上课日期</h3> <input type="text" class="create-date">
+                <h3>上课时间</h3>
+                <input type="text" class="window-time-start">
+                <h3>下课时间</h3>
+                <input type="text" class="window-time-end">
+                <h3>授课场地</h3>
+                <input type="text" class="window-location">
+                <div class="update-course" style="width: 115px;">添加/修改课程</div>
+                <div class="delete-course">删除课程</div>
+            </div>
+        </div>
+
+        <!-- 实现各种功能区的框架 右边 -->
+        <div class="column">
+            <h2 style="margin: 10px;">课程分类</h2>
+            <ul></ul>
+            <div class="column-btn">
+                <div class="create-classify">新增课程分类</div>
+                <div class="delete-classify" >删除课程分类</div>
+            </div>
+
+            <div class="column-window">
+                <span class="close">×</span>
+                <h2>请输入新增课程分类的名称</h2>
+                <input type="text">
+                <div class="column-submit">确认</div>
+            </div>
+            <div class="create">
+                添加课程
+            </div>
+        </div>
+    </div>  
+    <script src="index.js"></script>
+
+</body>
+</html>
